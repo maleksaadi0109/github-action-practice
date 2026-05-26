@@ -1,26 +1,10 @@
-
-
 on:
-  workflow_dispatch:
-
-  push:
-    branches:
-      - main
-      
-
-  pull_request:
-    branches:
-      - main
-      
+ repository_dispatch:
+  types: [incident_report]
 
 jobs:
-  test:
+  handle-incident:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: list files
-        run: ls -la
-       
-
+      - name: Print incident details
+        run: echo "incident reported"
