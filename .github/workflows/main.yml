@@ -1,10 +1,29 @@
 on:
- repository_dispatch:
-  types: [incident_report]
+ workflow_dispatch:
+
 
 jobs:
-  handle-incident:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Print incident details
-        run: echo "incident reported"
+   job_1:
+      runs-on: ubuntu-latest
+      steps:
+      - run: "echo Job ${{github.job}}"
+
+    job_2:
+      runs-on: ubuntu-latest
+      needs: job_1
+      steps:
+      - run:"echo Job ${{github.job}}"
+
+
+     job_3:
+      runs-on: ubuntu-latest
+      needs: job_1
+      steps:
+      - run:"echo Job ${{github.job}}"
+
+
+      job_4:
+      runs-on: ubuntu-latest
+      needs:  [job_2,job_3]
+      steps:
+      - run:"echo Job ${{github.job}}"
